@@ -28,9 +28,9 @@ const app = express();
 
 app.use(cors({
     origin: [
-        "https://localhost:5173"
-        // Aquí posteriormente agregaremos
-        // la URL de producción del frontend
+        "https://localhost:5173",
+        "https://wonderful-arithmetic-d63b7b.netlify.app"
+        // Agregar aqui otras URLs de produccion del frontend
     ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
