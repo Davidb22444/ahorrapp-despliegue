@@ -1,0 +1,10 @@
+[build]
+  base = "Frontend"
+  command = "npm run build"
+  publish = "dist"
+
+# SPA: que las rutas directas no den 404
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
