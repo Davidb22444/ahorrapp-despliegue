@@ -20,3 +20,7 @@ npm-debug.log*
 .DS_Store
 
 certs/
+
+# Cache local de Firebase Hosting
+.firebase/
+firebase-debug.log*
