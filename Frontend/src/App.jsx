@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
 import { NotificacionesProvider } from './context/NotificacionesContext';
@@ -65,12 +65,15 @@ function AsistenteFlotante() {
   return <Asistente />;
 }
 
+// Pages usa rutas con # para permitir recargas sin reglas de servidor.
+const Router = import.meta.env.VITE_GITHUB_PAGES === 'true' ? HashRouter : BrowserRouter;
+
 function App() {
   return (
     <AuthProvider>
       <ToastProvider>
         <NotificacionesProvider>
-          <BrowserRouter>
+          <Router>
             <Routes>
           {/* ========== RUTAS PÚBLICAS (sin sesión) ========== */}
           <Route path="/" element={<Index />} />
@@ -284,7 +287,7 @@ function App() {
         
         {/* Asistente visible en todas las páginas (solo si hay sesión) */}
         <AsistenteFlotante />
-          </BrowserRouter>
+          </Router>
         </NotificacionesProvider>
       </ToastProvider>
     </AuthProvider>

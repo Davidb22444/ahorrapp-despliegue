@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
@@ -262,12 +262,12 @@ export default function Login() {
                         Recordar sesión
                       </label>
                     </div>
-                    <a
-                      href="/OlvidarContrasena"
+                    <Link
+                      to="/OlvidarContrasena"
                       className="text-xs text-amber-400 hover:text-amber-300 hover:underline transition-colors"
                     >
                       ¿Olvidaste tu contraseña?
-                    </a>
+                    </Link>
                   </div>
 
                   {error && !isRegister && (

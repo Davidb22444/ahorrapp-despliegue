@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { forgotPassword } from "../services/api";
 
 export default function OlvidarContra() {
@@ -102,11 +102,11 @@ export default function OlvidarContra() {
         {/* Footer */}
         <p className="text-center text-xs text-white/30">
           ¿Recordaste tu contraseña?{" "}
-          <a href="/Login">
+          <Link to="/Login">
             <span className="text-[#e0b855] font-medium cursor-pointer hover:text-[#c9a84c] transition-colors">
               Iniciar sesión
             </span>
-          </a>
+          </Link>
         </p>
       </div>
     </div>

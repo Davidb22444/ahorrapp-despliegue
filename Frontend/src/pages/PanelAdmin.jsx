@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { getUsuariosPanelAdmin, getDependientesPanelAdmin, getHistorial } from '../services/api';
 
 export default function PanelAdmin() {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [usuarios, setUsuarios] = useState({ totalUsuarios: 0 });
   const [dependientes, setDependientes] = useState({ totalDependientes: 0 });
   const [actividad, setActividad] = useState([]);
@@ -72,7 +75,8 @@ export default function PanelAdmin() {
   const handleLogout = () => { 
     localStorage.clear();
     sessionStorage.clear();
-    window.location.replace('/Login');
+    logout();
+    navigate('/Login', { replace: true });
   }
 
   return (
