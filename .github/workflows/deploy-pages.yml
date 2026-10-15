@@ -7,6 +7,11 @@ on:
       - 'Frontend/**'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
+    inputs:
+      cancel_deployment:
+        description: 'Optional SHA of an interrupted Pages deployment to cancel'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -30,6 +35,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Cancel an interrupted Pages deployment
+        if: github.event_name == 'workflow_dispatch' && inputs.cancel_deployment != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PAGES_DEPLOYMENT_ID: ${{ inputs.cancel_deployment }}
+        run: gh api --method POST "repos/$GH_REPO/pages/deployments/$PAGES_DEPLOYMENT_ID/cancel"
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
